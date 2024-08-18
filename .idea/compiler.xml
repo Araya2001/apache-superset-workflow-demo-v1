@@ -12,7 +12,11 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="mongo-db-data-loader" target="21" />
+      <module name="mongo-db-data-loader.main" target="21" />
+      <module name="mongo-db-data-loader.test" target="21" />
       <module name="postgresql-data-extractor" target="21" />
+      <module name="postgresql-data-extractor.main" target="21" />
+      <module name="postgresql-data-extractor.test" target="21" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -3,14 +3,6 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/mongo-db-data-loader" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/mongo-db-data-loader" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/mongodb-csv-datawarehouse" />
         <option name="modules">
           <set>
@@ -19,10 +11,10 @@
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/postgresql-data-extractor" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/postgresql-etl-scheduler" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/postgresql-data-extractor" />
+            <option value="$PROJECT_DIR$/postgresql-etl-scheduler" />
           </set>
         </option>
       </GradleProjectSettings>

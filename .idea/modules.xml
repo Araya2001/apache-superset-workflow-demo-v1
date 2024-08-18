@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/apache-superset-workflow-demo-v1.iml" filepath="$PROJECT_DIR$/.idea/apache-superset-workflow-demo-v1.iml" />
       <module fileurl="file://$PROJECT_DIR$/next-js-frontend-csv-loader-v1.iml" filepath="$PROJECT_DIR$/next-js-frontend-csv-loader-v1.iml" />
-      <module fileurl="file://$PROJECT_DIR$/postgresql-etl-scheduler/postgresql-etl-scheduler.iml" filepath="$PROJECT_DIR$/postgresql-etl-scheduler/postgresql-etl-scheduler.iml" />
     </modules>
   </component>
 </project>
