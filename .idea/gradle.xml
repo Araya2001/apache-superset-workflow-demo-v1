@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/mongo-db-data-loader" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/mongo-db-data-loader" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/mongodb-csv-datawarehouse" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/mongodb-csv-datawarehouse" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/postgresql-data-extractor" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/postgresql-data-extractor" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
