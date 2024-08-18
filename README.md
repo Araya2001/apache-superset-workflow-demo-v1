@@ -17,3 +17,11 @@ This repository assumes you have `Docker`, `Docker-compose`, `Java` and `Node` i
 
 Please check this [Quickstart Guide](https://superset.apache.org/docs/quickstart/) from Apache Superset!
 > This repository already ignores `superset` clones
+
+```shell
+$ git clone https://github.com/apache/superset
+$ cd superset
+$ docker compose -f docker-compose-image-tag.yml up
+```
+
+> This code block works for both PowerShell and Unix-like shells 

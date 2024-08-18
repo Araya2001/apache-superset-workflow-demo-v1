@@ -1,0 +1,30 @@
+spring:
+  data:
+    mongodb:
+      uri: ${MONGODB_CONNECTION_STRING}
+  mvc:
+    converters:
+      preferred-json-mapper: jackson
+  datasource:
+    url: ${POSTGRES_CONNECTION_STRING}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  application:
+    name: postgresql-etl-scheduler
+  h2:
+    console:
+      enabled: true
+server:
+  http2:
+    enabled: true
+  port: ${PORT:8081}
+  error:
+    include-message: always

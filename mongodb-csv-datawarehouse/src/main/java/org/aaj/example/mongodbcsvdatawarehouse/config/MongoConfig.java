@@ -1,4 +1,4 @@
-package org.aaj.example.messagestorer.config;
+package org.aaj.example.mongodbcsvdatawarehouse.config;
 
 
 import com.mongodb.ConnectionString;
