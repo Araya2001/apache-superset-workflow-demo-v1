@@ -84,7 +84,7 @@ public class EcommerceSaleETLServiceImpl implements ETLService {
 
 
     private LocalDate convertToDate(String dateString) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
         try {
             return LocalDate.parse(dateString, formatter);
         } catch (DateTimeParseException e) {

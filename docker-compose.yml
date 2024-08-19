@@ -51,7 +51,7 @@ services:
       context: mongodb-csv-datawarehouse
       dockerfile: Dockerfile
     environment:
-      - MONGODB_CONNECTION_STRING=mongodb://MyUser:MyCredential@mongodb:27017/reactive_events_v2?authSource=admin
+      - MONGODB_CONNECTION_STRING=mongodb://MyUser:MyCredential@mongodb:27017/test?authSource=admin
     networks:
       - superset-demo-net
     ports:
@@ -61,20 +61,37 @@ services:
         condition: service_healthy
 
   # ------ postgresql-etl-scheduler ------
-#  postgresql-etl-scheduler:
-#    container_name: postgresql-etl-scheduler
-#    build:
-#      context: mongodb-csv-datawarehouse
-#      dockerfile: Dockerfile
-#    environment:
-#      - MONGODB_CONNECTION_STRING=mongodb://MyUser:MyCredential@mongodb:27017/reactive_events_v2?authSource=admin
-#      - POSTGRES_CONNECTION_STRING=jdbc:postgresql://postgres_db_dw:5432/postgres_db_dw
-#      - POSTGRES_USER=dev-ninja
-#      - POSTGRES_PASSWORD=ujac8ozJExiHFfcTNPd6
-#    networks:
-#      - superset-demo-net
-#    ports:
-#      - "8081:8081"
-#    depends_on:
-#      topic-starter:
-#        condition: service_healthy
+  postgresql-etl-scheduler:
+    container_name: postgresql-etl-scheduler
+    build:
+      context: postgresql-etl-scheduler
+      dockerfile: Dockerfile
+    environment:
+      - MONGODB_CONNECTION_STRING=mongodb://MyUser:MyCredential@mongodb:27017/test?authSource=admin
+      - POSTGRES_CONNECTION_STRING=jdbc:postgresql://postgres_db_dw:5432/postgres_db_dw
+      - POSTGRES_USER=dev-ninja
+      - POSTGRES_PASSWORD=ujac8ozJExiHFfcTNPd6
+    networks:
+      - superset-demo-net
+    ports:
+      - "8082:8082"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+  # ------ Next.js Service ------
+  next-js-frontend-csv-loader-v1-app:
+    container_name: next-js-frontend-csv-loader-v1-app
+    build:
+      context: next-js-frontend-csv-loader-v1
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_ETL_API_URL=http://localhost:8082/etl/api/v1
+      - NEXT_PUBLIC_CSV_API_URL=http://localhost:8081/upload-csv
+    networks:
+      - superset-demo-net
+    ports:
+      - "3000:3000"
+    depends_on:
+      mongodb:
+        condition: service_healthy

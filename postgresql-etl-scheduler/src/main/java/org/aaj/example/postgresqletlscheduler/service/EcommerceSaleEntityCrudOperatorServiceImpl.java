@@ -5,14 +5,12 @@ import org.aaj.example.postgresqletlscheduler.model.EcommerceSaleEntity;
 import org.aaj.example.postgresqletlscheduler.repository.EcommerceSaleEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @Log4j2
-@Transactional
 public class EcommerceSaleEntityCrudOperatorServiceImpl implements EcommerceSaleEntityCrudOperatorService {
 
     private final EcommerceSaleEntityRepository repository;
