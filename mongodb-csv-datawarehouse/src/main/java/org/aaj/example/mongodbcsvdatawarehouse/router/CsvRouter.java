@@ -14,6 +14,6 @@ public class CsvRouter {
     @Bean
     public RouterFunction<ServerResponse> route(CsvHandler handler) {
         return RouterFunctions
-                .route(POST("/reactive-streams-basics-demo/api/v1/user"), handler::uploadCSV);
+                .route(POST("/upload-csv"), handler::uploadCSV);
     }
 }

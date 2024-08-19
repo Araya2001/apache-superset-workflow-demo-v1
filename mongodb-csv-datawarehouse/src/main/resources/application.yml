@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: mongodb-csv-datawarehouse
+server:
+  port: ${PORT:8081}

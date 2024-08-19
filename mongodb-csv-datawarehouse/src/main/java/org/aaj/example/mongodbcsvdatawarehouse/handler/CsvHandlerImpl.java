@@ -7,8 +7,8 @@ import org.aaj.example.mongodbcsvdatawarehouse.service.EcommerceSaleCsvToDocumen
 import org.aaj.example.mongodbcsvdatawarehouse.service.EcommerceSaleDocumentCrudOperatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
@@ -37,43 +37,32 @@ public class CsvHandlerImpl implements CsvHandler {
         var multipartDataPublisher = serverRequest.multipartData();
 
         // Map multiple file parts into a single value map
-        var multipartExtractedFile = multipartDataPublisher.map(parts -> (MultipartFile) parts.toSingleValueMap().get("file"));
+        var multiValueMapExtractedPart = multipartDataPublisher.map(parts -> parts.toSingleValueMap().get("file"));
+
+        var partFileExtractedFromPartInterface = multiValueMapExtractedPart
+                .filter(part -> part instanceof FilePart)
+                .ofType(FilePart.class)
+                .map(filePart -> filePart);
 
         // Map Multipart File to MongoDB Documents
         var mappedEcommerceSaleDocumentsFromFile =
-                multipartExtractedFile.map(ecommerceSaleCsvToDocumentMapperService::mapInitialObjectToResultObject);
-
-        // Create flux out of the list from Document Mapper service
-        var fluxFromEcommerceSalesDocuments =
-                mappedEcommerceSaleDocumentsFromFile.flatMapIterable(ecommerceSaleDocuments -> ecommerceSaleDocuments);
+                partFileExtractedFromPartInterface.flatMapMany(ecommerceSaleCsvToDocumentMapperService::mapInitialObjectToResultObject);
 
         // Insert the documents in MongoDb from the created flux
-        var createdEcommerceSaleDocuments = ecommerceSaleDocumentCrudOperatorService.create(fluxFromEcommerceSalesDocuments);
+        var createdEcommerceSaleDocuments = ecommerceSaleDocumentCrudOperatorService.create(mappedEcommerceSaleDocumentsFromFile);
 
 
-        // Build a Server response
-        var builtServerResponse = createdEcommerceSaleDocuments.
+        // Build a Server response with inline return value
+        return createdEcommerceSaleDocuments.
                 collectList()
-                .map(ecommerceSaleDocuments ->
-                        ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(
+                .flatMap(ecommerceSaleDocuments ->
+                        ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValue(
                                 ModelResponse.<List<EcommerceSaleDocument>>builder()
-                                        .message("The Ecommerce Sale Documents have been uploaded")
                                         .status("OK")
+                                        .message("The Ecommerce Sale Documents have been uploaded")
                                         .model(ecommerceSaleDocuments)
-                                        .build(),
-                                ModelResponse.class)
+                                        .build())
                 )
-                .onErrorReturn(
-                        ServerResponse.badRequest().contentType(MediaType.APPLICATION_JSON).body(
-                                ModelResponse.<List<EcommerceSaleDocument>>builder()
-                                        .status("ERROR")
-                                        .message("The Ecommerce Sale Documents upload failed")
-                                        .model(List.of())
-                                        .build(),
-                                ModelResponse.class)
-                );
-
-
-        return builtServerResponse.flatMap(serverResponseMono -> serverResponseMono);
+                .doOnError(throwable -> log.error(throwable.getMessage(), throwable));
     }
 }

@@ -1,7 +1,10 @@
 version: '3'
 networks:
   superset-demo-net:
-    driver: host
+    driver: bridge
+volumes:
+  postgres-data:
+    driver: local
 services:
 
   # ------ MongoDB ------
@@ -43,7 +46,7 @@ services:
 
   # ------ mongodb-csv-data-warehouse ------
   mongodb-csv-data-warehouse:
-    container_name: mongodb-csv-dataware-house
+    container_name: mongodb-csv-data-warehouse
     build:
       context: mongodb-csv-datawarehouse
       dockerfile: Dockerfile
@@ -54,24 +57,24 @@ services:
     ports:
       - "8081:8081"
     depends_on:
-      topic-starter:
+      mongodb:
         condition: service_healthy
 
   # ------ postgresql-etl-scheduler ------
-  postgresql-etl-scheduler:
-    container_name: postgresql-etl-scheduler
-    build:
-      context: mongodb-csv-datawarehouse
-      dockerfile: Dockerfile
-    environment:
-      - MONGODB_CONNECTION_STRING=mongodb://MyUser:MyCredential@mongodb:27017/reactive_events_v2?authSource=admin
-      - POSTGRES_CONNECTION_STRING=jdbc:postgresql://postgres_db_dw:5432/postgres_db_dw
-      - POSTGRES_USER=dev-ninja
-      - POSTGRES_PASSWORD=ujac8ozJExiHFfcTNPd6
-    networks:
-      - superset-demo-net
-    ports:
-      - "8081:8081"
-    depends_on:
-      topic-starter:
-        condition: service_healthy
+#  postgresql-etl-scheduler:
+#    container_name: postgresql-etl-scheduler
+#    build:
+#      context: mongodb-csv-datawarehouse
+#      dockerfile: Dockerfile
+#    environment:
+#      - MONGODB_CONNECTION_STRING=mongodb://MyUser:MyCredential@mongodb:27017/reactive_events_v2?authSource=admin
+#      - POSTGRES_CONNECTION_STRING=jdbc:postgresql://postgres_db_dw:5432/postgres_db_dw
+#      - POSTGRES_USER=dev-ninja
+#      - POSTGRES_PASSWORD=ujac8ozJExiHFfcTNPd6
+#    networks:
+#      - superset-demo-net
+#    ports:
+#      - "8081:8081"
+#    depends_on:
+#      topic-starter:
+#        condition: service_healthy

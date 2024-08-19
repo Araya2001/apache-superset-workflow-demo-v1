@@ -1,16 +1,16 @@
 package org.aaj.example.mongodbcsvdatawarehouse.model;
 
 import com.opencsv.bean.CsvBindByName;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collation = "ecommerce-sales")
+@Document(collection = "ecommerce-sales")
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class EcommerceSaleDocument {
 
     @Id
