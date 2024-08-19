@@ -95,4 +95,13 @@ This command will set up the entire stack, automate dependencies, and ensure tha
 
 ## Annex
 
+### Images
+
 ![](annex/apache-superset-demo-v1.drawio.svg "Diagram")
+![](annex/img.png "front-end annex")
+![](annex/img_1.png "superset annex")
+
+### Links
+
+- [Superset: Docker Installation](https://superset.apache.org/docs/installation/docker-compose/)
+- [Kaggle: Exploring E-commerce Trends](https://www.kaggle.com/datasets/muhammadroshaanriaz/e-commerce-trends-a-guide-to-leveraging-dataset/data)
