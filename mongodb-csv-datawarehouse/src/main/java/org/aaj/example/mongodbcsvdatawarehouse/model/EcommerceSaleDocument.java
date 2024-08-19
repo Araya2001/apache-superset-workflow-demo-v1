@@ -1,12 +1,11 @@
 package org.aaj.example.mongodbcsvdatawarehouse.model;
 
+import com.opencsv.bean.CsvBindByName;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.time.LocalDate;
 
 @Document(collation = "ecommerce-sales")
 @Getter
@@ -15,16 +14,28 @@ import java.time.LocalDate;
 public class EcommerceSaleDocument {
 
     @Id
+    @CsvBindByName(column = "ProductID")
     private Integer productID;
+    @CsvBindByName(column = "ProductName")
     private String productName;
+    @CsvBindByName(column = "Category")
     private String category;
+    @CsvBindByName(column = "Price")
     private Double price;
+    @CsvBindByName(column = "Rating")
     private Double rating;
+    @CsvBindByName(column = "NumReviews")
     private Integer numReviews;
+    @CsvBindByName(column = "StockQuantity")
     private Integer stockQuantity;
+    @CsvBindByName(column = "Discount")
     private Double discount;
+    @CsvBindByName(column = "Sales")
     private Integer sales;
-    private LocalDate dateAdded;
+    @CsvBindByName(column = "DateAdded")
+    private String dateAdded;
+    @CsvBindByName(column = "City")
     private String city;
+    @CsvBindByName(column = "Stock In Vast or Limited Quantity")
     private Boolean isStockVast;
 }

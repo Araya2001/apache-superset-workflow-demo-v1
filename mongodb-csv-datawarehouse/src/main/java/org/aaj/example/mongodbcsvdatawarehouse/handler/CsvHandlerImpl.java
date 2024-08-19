@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono;
 
 @Component
 @Log4j2
-public class CSVHandlerImpl implements CSVHandler {
+public class CsvHandlerImpl implements CsvHandler {
     @Override
     public Mono<ServerResponse> uploadCSV(ServerRequest serverRequest) {
 
