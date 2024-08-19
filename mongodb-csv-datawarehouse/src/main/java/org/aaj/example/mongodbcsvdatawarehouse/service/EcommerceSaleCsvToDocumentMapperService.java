@@ -5,5 +5,5 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-public interface EcommerceSalesCsvToDocumentMapperService extends ObjectMapperService<MultipartFile, List<EcommerceSaleDocument>> {
+public interface EcommerceSaleCsvToDocumentMapperService extends ObjectMapperService<MultipartFile, List<EcommerceSaleDocument>> {
 }

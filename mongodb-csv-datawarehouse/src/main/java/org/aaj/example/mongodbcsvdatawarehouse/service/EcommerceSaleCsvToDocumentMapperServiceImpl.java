@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 @Log4j2
-public class EcommerceSalesCsvToDocumentMapperServiceImpl implements EcommerceSalesCsvToDocumentMapperService {
+public class EcommerceSaleCsvToDocumentMapperServiceImpl implements EcommerceSaleCsvToDocumentMapperService {
     @Override
     public List<EcommerceSaleDocument> mapInitialObjectToResultObject(MultipartFile multipartFile) {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(multipartFile.getInputStream()))) {

@@ -1,24 +1,24 @@
 package org.aaj.example.mongodbcsvdatawarehouse.service;
 
-import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public interface MongoDbCrudOperatorService<Document, Id> {
-    Mono<Document> get(Id id);
+    Mono<Document> get(Mono<Id> id);
 
-    Mono<Document> create(Document document);
+    Mono<Document> create(Mono<Document> document);
 
-    Mono<Document> update(Document document);
+    Mono<Document> update(Mono<Document> document);
 
-    Mono<Void> delete(Id id);
+    Mono<Void> delete(Mono<Id> id);
 
-    Flux<Document> get(Iterable<Id> ids);
+    Flux<Document> get(Flux<Id> ids);
 
-    Flux<Document> create(Iterable<Document> documents);
+    Flux<Document> create(Flux<Document> documents);
 
-    Flux<Document> update(Iterable<Document> documents);
+    Flux<Document> update(Flux<Document> documents);
 
-    Mono<Void> delete(Iterable<Id> ids);
+    Mono<Void> delete(Flux<Id> ids);
 
     Flux<Document> getAll();
 }
