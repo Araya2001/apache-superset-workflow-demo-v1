@@ -25,6 +25,6 @@ spring:
 server:
   http2:
     enabled: true
-  port: ${PORT:8081}
+  port: ${PORT:8082}
   error:
     include-message: always
