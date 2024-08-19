@@ -39,6 +39,7 @@ public class CsvHandlerImpl implements CsvHandler {
         // Map multiple file parts into a single value map
         var multiValueMapExtractedPart = multipartDataPublisher.map(parts -> parts.toSingleValueMap().get("file"));
 
+        // Filter Part to be instanceof FilePart since we want files.
         var partFileExtractedFromPartInterface = multiValueMapExtractedPart
                 .filter(part -> part instanceof FilePart)
                 .ofType(FilePart.class)

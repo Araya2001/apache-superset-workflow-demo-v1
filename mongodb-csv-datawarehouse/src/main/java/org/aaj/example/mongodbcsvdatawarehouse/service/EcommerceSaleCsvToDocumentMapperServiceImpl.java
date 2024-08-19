@@ -18,14 +18,19 @@ public class EcommerceSaleCsvToDocumentMapperServiceImpl implements EcommerceSal
     @Override
     public Flux<EcommerceSaleDocument> mapInitialObjectToResultObject(FilePart filePart) {
 
+        // Get DataBuffer Flux
         var dataBufferFlux = filePart.content();
 
+        // Join DataBuffer into a Mono Stream
         var joinedDataBuffer = DataBufferUtils.join(dataBufferFlux);
 
+        // Map joined DataBuffer as InputStream
         var inputStreamFromDataBuffer = joinedDataBuffer.map(DataBuffer::asInputStream);
 
+        // Create a buffered reader for CsvToBeanBuilder to read csv file
         var bufferedReader = inputStreamFromDataBuffer.map(inputStream -> new BufferedReader(new InputStreamReader(inputStream)));
 
+        // get mapped values of Ecommerce Sales Document from CSV
         var mappedCsvValuesToEcommerceSaleDocument = bufferedReader
                 .flatMapIterable(br ->
                         new CsvToBeanBuilder<EcommerceSaleDocument>(br)
