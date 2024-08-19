@@ -10,6 +10,7 @@ interface FileDataProps {
     file?: File | null;
     isFileSubmitted?: boolean;
     submissionProgress?: number;
+    onSubmissionProgress?: (progress: number) => void;
     isSubmissionFinished?: boolean;
 
 }
@@ -17,8 +18,7 @@ interface FileDataProps {
 const FileData: React.FC<FileDataProps> = ({
                                                file = null,
                                                isFileSubmitted = true,
-                                               submissionProgress = 10,
-                                               isSubmissionFinished = false
+                                               submissionProgress = 0,
                                            }) => {
     const [selectedFile, setSelectedFile] = useState<File | null>(file);
     const pStyle: string = "font-light text-teal-100";
