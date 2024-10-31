@@ -1,7 +1,7 @@
 # Apache Superset Workflow Demo V1
 
 ```
-Author(s):      Alejandro Araya Jiménez, Jeremy Quirós Marín, Ricardo Artavia Solano, Sebastián Acuña Pérez
+Author(s):      Alejandro Araya Jiménez
 Date Created:   2024-08-17
 Date Updated:   2024-08-19
 License:        Apache 2.0
